@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using RealState.Core.Context;
 using System;
 
 
@@ -20,6 +21,15 @@ namespace RealState.Core
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<RealStateContext>()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<RealStateContext>().As<IRealStateContext>()
+                     .WithParameter("connectionString", _connectionString)
+                     .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                     .InstancePerLifetimeScope();
 
             base.Load(builder);
         }
