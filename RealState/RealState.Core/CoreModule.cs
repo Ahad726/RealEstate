@@ -1,6 +1,10 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
 using RealState.Core.Context;
+using RealState.Core.Entity;
+using RealState.Core.Repositories;
+using RealState.Core.Services;
+using RealState.Core.UnitOfWorks;
 using System;
 
 
@@ -30,6 +34,17 @@ namespace RealState.Core
                      .WithParameter("connectionString", _connectionString)
                      .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                      .InstancePerLifetimeScope();
+
+            builder.RegisterType<CustomerUnitOfWork>().As<ICustomerUnitOfWork>()
+                 .WithParameter("connectionString", _connectionString)
+                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<CustomerRepository>().As<ICustomerRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CustomerService>().As<ICustomerService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }

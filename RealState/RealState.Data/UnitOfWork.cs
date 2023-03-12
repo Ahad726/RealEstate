@@ -9,7 +9,7 @@ namespace RealState.Data
 {
     public class UnitOfWork<T> : IUnitOfWork<T> where T : DbContext
     {
-        private T _dbContext;
+        protected T _dbContext;
         public UnitOfWork( string connectionString, string migrationAssemblyName)
         {
             _dbContext =(T)Activator.CreateInstance(typeof(T), connectionString, migrationAssemblyName);
