@@ -11,11 +11,13 @@ namespace RealState.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
+        [HttpPost]
         public IActionResult Add(CustomerModel customer)
         {
             if (ModelState.IsValid)
