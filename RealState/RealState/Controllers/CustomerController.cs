@@ -18,18 +18,19 @@ namespace RealState.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Add(CustomerModel customer)
         {
             if (ModelState.IsValid)
             {
                 var model = new CustomerUpdateModel();
                 model.AddNewCustomer(customer);
-                return View(nameof(Index));
+                return RedirectToAction(nameof(CustomerController.Index));
             }
             return View(customer);
         }
 
-        public IActionResult GetFlights()
+        public IActionResult GetCustomers()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var model = new CustomerViewModel();

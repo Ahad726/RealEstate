@@ -35,8 +35,8 @@ namespace RealState.Models.CustomerModels
                                 record.Id.ToString(),
                                 record.Name,
                                 record.Email,
-                                record.Address,
                                 record.PhoneNumber,
+                                record.Address,
                         }
                     ).ToArray()
 
