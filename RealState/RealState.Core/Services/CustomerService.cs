@@ -55,5 +55,21 @@ namespace RealState.Core.Services
             _customerUnitOfWork.CustomerRepository.Remove(id);
             _customerUnitOfWork.Save();
         }
+
+        public IEnumerable<Customer> GetCustomers(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
+        {
+            return _customerUnitOfWork.CustomerRepository.Get(
+
+                out total,
+                out totalFiltered,
+                 x => x.Name.Contains(searchText) || x.Email.Contains(searchText)
+                 || x.Address.Contains(searchText) || x.PhoneNumber.Contains(searchText),
+                null,
+                "",
+                pageIndex,
+                pageSize,
+                true);  
+                
+        }
     }
 }

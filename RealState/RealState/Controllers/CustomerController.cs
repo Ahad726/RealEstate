@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealState.Models;
 using RealState.Models.CustomerModels;
 
 namespace RealState.Controllers
@@ -22,10 +23,16 @@ namespace RealState.Controllers
                 var model = new CustomerUpdateModel();
                 model.AddNewCustomer(customer);
                 return View(nameof(Index));
-
             }
-
             return View(customer);
+        }
+
+        public IActionResult GetFlights()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new CustomerViewModel();
+            var data = model.GetCustomers(tableModel);
+            return Json(data);
         }
     }
 }
