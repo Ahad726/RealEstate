@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using RealState.Core.Entity;
 using RealState.Core.Services;
+using static Humanizer.In;
 
 namespace RealState.Models.CustomerModels
 {
@@ -18,6 +19,19 @@ namespace RealState.Models.CustomerModels
         {
             _customerService.AddNewCustomer(new Customer
             {
+                Name = customer.Name,
+                Email = customer.Email,
+                PhoneNumber = customer.Phone,
+                Address = customer.Adress
+            });
+        }
+
+        public void UpdateCustomer(CustomerModel customer)
+        {
+
+            _customerService.EditCustomer(new Customer
+            {
+                Id = customer.Id,
                 Name = customer.Name,
                 Email = customer.Email,
                 PhoneNumber = customer.Phone,

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using RealState.Core.Services;
+using System;
 using System.Linq;
 
 namespace RealState.Models.CustomerModels
@@ -40,6 +41,20 @@ namespace RealState.Models.CustomerModels
                         }
                     ).ToArray()
 
+            };
+        }
+
+        public CustomerModel Load(int id)
+        {
+            var customer = _customerService.GetCustomerById(id);
+
+            return new CustomerModel
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.PhoneNumber,
+                Adress = customer.Address
             };
         }
     }
