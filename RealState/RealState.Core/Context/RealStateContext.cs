@@ -13,6 +13,11 @@ namespace RealState.Core.Context
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Block> Blocks { get; set; }
+        public DbSet<Plot> Plots { get; set; }
+        public DbSet<PlotBooking> PlotBookings { get; set; }
+
         public RealStateContext(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;
@@ -30,9 +35,18 @@ namespace RealState.Core.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Plot>()
+                .HasOne(p => p.Block)
+                .WithMany(b => b.Plots)
+                .HasForeignKey(p => p.BlockId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<PlotBooking>()
+                .HasKey(pb => pb.Id);
+
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        
     }
 }
