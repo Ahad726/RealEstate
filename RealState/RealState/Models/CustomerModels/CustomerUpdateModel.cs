@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using RealState.Core.Entity;
 using RealState.Core.Services;
+using System.Collections.Generic;
 using static Humanizer.In;
 
 namespace RealState.Models.CustomerModels
@@ -37,6 +38,13 @@ namespace RealState.Models.CustomerModels
                 PhoneNumber = customer.Phone,
                 Address = customer.Adress
             });
+        }
+
+
+        public void DeleteCustomer(int id)
+        {
+            _customerService.Remove(id);
+
         }
     }
 }

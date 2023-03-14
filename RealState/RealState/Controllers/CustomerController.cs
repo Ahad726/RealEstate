@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealState.Models;
 using RealState.Models.CustomerModels;
+using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
@@ -57,6 +58,14 @@ namespace RealState.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            var model = new CustomerUpdateModel();
+            model.DeleteCustomer(Id);
+            return RedirectToAction(nameof(CustomerController.Index));
+
+        }
 
     }
 }
