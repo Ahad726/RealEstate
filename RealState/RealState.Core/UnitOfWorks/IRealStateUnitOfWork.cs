@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace RealState.Core.UnitOfWorks
 {
-    public interface ICustomerUnitOfWork : IUnitOfWork<RealStateContext>
+    public interface IRealStateUnitOfWork : IUnitOfWork<RealStateContext>
     {
         ICustomerRepository CustomerRepository { get; set; }
+        IBlockRepository BlockRepository { get; set; }
+        IPlotRepository PlotRepository { get; set; }
+
     }
 }

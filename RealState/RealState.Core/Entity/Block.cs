@@ -12,8 +12,7 @@ namespace RealState.Core.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
+        public string Thana { get; set; }
         public int NumPlots { get; set; }
         public int NumAvailablePlots { get; set; }
         public int NumSoldPlots { get; set; }

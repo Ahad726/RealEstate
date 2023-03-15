@@ -35,7 +35,7 @@ namespace RealState.Core
                      .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                      .InstancePerLifetimeScope();
 
-            builder.RegisterType<CustomerUnitOfWork>().As<ICustomerUnitOfWork>()
+            builder.RegisterType<RealStateUnitOfWork>().As<IRealStateUnitOfWork>()
                  .WithParameter("connectionString", _connectionString)
                  .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                  .InstancePerLifetimeScope();
@@ -44,6 +44,18 @@ namespace RealState.Core
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<CustomerService>().As<ICustomerService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<BlockRepository>().As<IBlockRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<BlockService>().As<IBlockService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PlotRepository>().As<IPlotRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PlotService>().As<IPlotService>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

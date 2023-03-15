@@ -10,34 +10,34 @@ namespace RealState.Core.Services
 {
     public class CustomerService : ICustomerService
     {
-        private ICustomerUnitOfWork _customerUnitOfWork;
+        private IRealStateUnitOfWork _realStateUnitOfWork;
 
-        public CustomerService(ICustomerUnitOfWork customerUnitOfWork)
+        public CustomerService(IRealStateUnitOfWork RealStateUnitOfWork)
         {
-            _customerUnitOfWork = customerUnitOfWork;
+            _realStateUnitOfWork = RealStateUnitOfWork;
         }
 
         public void AddNewCustomer(Customer customer)
         {
             if (customer == null) throw new InvalidOperationException("Customer Cannot ber null");
 
-            _customerUnitOfWork.CustomerRepository.Add(customer);
-            _customerUnitOfWork.Save();
+            _realStateUnitOfWork.CustomerRepository.Add(customer);
+            _realStateUnitOfWork.Save();
         }
 
         public IEnumerable<Customer> GetAllCustomer()
         {
-            return _customerUnitOfWork.CustomerRepository.GetAll();
+            return _realStateUnitOfWork.CustomerRepository.GetAll();
         }
 
         public Customer GetCustomerById(int id)
         {
-            return _customerUnitOfWork.CustomerRepository.GetById(id);
+            return _realStateUnitOfWork.CustomerRepository.GetById(id);
         }
 
         public void EditCustomer(Customer customer)
         {
-            var oldCustomer = _customerUnitOfWork.CustomerRepository.GetById(customer.Id);
+            var oldCustomer = _realStateUnitOfWork.CustomerRepository.GetById(customer.Id);
 
             if (oldCustomer != null)
             {
@@ -46,19 +46,19 @@ namespace RealState.Core.Services
                 oldCustomer.Address = customer.Address;
                 oldCustomer.PhoneNumber = customer.PhoneNumber;
 
-                _customerUnitOfWork.Save();
+                _realStateUnitOfWork.Save();
             }
         }
 
         public void Remove(int id)
         {
-            _customerUnitOfWork.CustomerRepository.Remove(id);
-            _customerUnitOfWork.Save();
+            _realStateUnitOfWork.CustomerRepository.Remove(id);
+            _realStateUnitOfWork.Save();
         }
 
         public IEnumerable<Customer> GetCustomers(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
-            return _customerUnitOfWork.CustomerRepository.Get(
+            return _realStateUnitOfWork.CustomerRepository.Get(
 
                 out total,
                 out totalFiltered,

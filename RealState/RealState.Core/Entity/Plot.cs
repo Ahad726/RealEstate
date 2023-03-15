@@ -9,12 +9,12 @@ namespace RealState.Core.Entity
     public class Plot
     {
         public int Id { get; set; }
+        public int BlockId { get; set; }
+        public Block Block { get; set; }
         public string PlotNumber { get; set; }
         public int Status { get; set; }
         public decimal Price { get; set; }
-        public string Owner { get; set; }
-        public int BlockId { get; set; }
-        public Block Block { get; set; }
+        
         public virtual IList<PlotBooking> Bookings { get; set; }
 
     }

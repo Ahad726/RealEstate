@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 
 namespace RealState.Core.UnitOfWorks
 {
-    public class CustomerUnitOfWork : UnitOfWork<RealStateContext>, ICustomerUnitOfWork
+    public class RealStateUnitOfWork : UnitOfWork<RealStateContext>, IRealStateUnitOfWork
     {
         public ICustomerRepository CustomerRepository { get; set; }
+        public IBlockRepository BlockRepository { get; set; }
+        public IPlotRepository PlotRepository { get; set; }
 
-        public CustomerUnitOfWork(string connectionString, string migrationAssemblyName)
+        public RealStateUnitOfWork(string connectionString, string migrationAssemblyName)
             : base(connectionString, migrationAssemblyName)
         {
             CustomerRepository = new CustomerRepository(_dbContext);
+            BlockRepository = new BlockRepository(_dbContext);
+            PlotRepository = new PlotRepository(_dbContext);
         }
     }
 }
