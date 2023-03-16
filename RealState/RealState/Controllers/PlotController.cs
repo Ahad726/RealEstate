@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealState.Models.BlockModels;
 using RealState.Models;
+using RealState.Models.PlotModels;
 
 namespace RealState.Controllers
 {
@@ -15,8 +16,8 @@ namespace RealState.Controllers
         public IActionResult GetPlots()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = new BlockViewModel();
-            var plots = model.GetBlocks(tableModel);
+            var model = new PlotViewModel();
+            var plots = model.GetPlots(tableModel);
             return Json(plots);
         }
     }

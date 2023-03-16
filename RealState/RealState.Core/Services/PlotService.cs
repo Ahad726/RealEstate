@@ -25,7 +25,7 @@ namespace RealState.Core.Services
                 var plotSize = plot.Block.NumPlots;
 
 
-                for (int i = 0; i <= plotSize; i++)
+                for (int i = 0; i < plotSize; i++)
                 {
                     var plotEntry = new Plot
                     {
@@ -73,8 +73,7 @@ namespace RealState.Core.Services
 
                 out total,
                 out totalFiltered,
-                 x => x.Status.ToString().Contains(searchText) || x.PlotNumber.ToString().Contains(searchText)
-                 || x.Price.ToString().Contains(searchText),
+                 x => x.PlotNumber.Contains(searchText) || x.Price.ToString().Contains(searchText),
                 null,
                 "",
                 pageIndex,
