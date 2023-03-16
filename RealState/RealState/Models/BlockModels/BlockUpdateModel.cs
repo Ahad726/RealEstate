@@ -2,6 +2,7 @@
 using RealState.Core.Entity;
 using RealState.Core.Services;
 using RealState.Models.CustomerModels;
+using RealState.Models.PlotModels;
 using System;
 
 namespace RealState.Models.BlockModels
@@ -9,15 +10,17 @@ namespace RealState.Models.BlockModels
     public class BlockUpdateModel
     {
         private IBlockService _blockService;
+        private IPlotService _plotService;
 
         public BlockUpdateModel()
         {
             _blockService = Startup.AutofacContainer.Resolve<IBlockService>();
+            _plotService = Startup.AutofacContainer.Resolve<IPlotService>();
         }
 
         public void AddNewBlock(BlockModel blockModel)
         {
-            _blockService.AddNewBlock(new Block
+            var block = _blockService.AddNewBlock(new Block
             {
                 Name = blockModel.Name,
                 Description = blockModel.Description,
@@ -26,6 +29,20 @@ namespace RealState.Models.BlockModels
                 NumAvailablePlots = blockModel.NumPlots,
                 NumSoldPlots = 0
             });
+
+            CreatePlots(block, blockModel.PlotPrice);
+        }
+
+        private void CreatePlots(Block block, decimal plotPrice)
+        {
+
+            _plotService.AddNewPlot(new Plot
+            {
+                BlockId = block.Id,
+                Price = plotPrice,
+                Block = block,
+                Status = 1
+            }) ;
         }
 
 

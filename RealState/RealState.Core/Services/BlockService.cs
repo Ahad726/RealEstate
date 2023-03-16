@@ -18,27 +18,12 @@ namespace RealState.Core.Services
             _realStateUnitOfWork = realStateUnitOfWork;
         }
 
-        public void AddNewBlock(Block block)
+        public Block AddNewBlock(Block block)
         {
             if (block == null) throw new InvalidOperationException("Block Cannot ber null");
             _realStateUnitOfWork.BlockRepository.Add(block);
             _realStateUnitOfWork.Save();
-            int blockId = block.Id;
-            if (blockId > 0)
-            {
-                for (int i = 0; i <= block.NumPlots; i++)
-                {
-                    var plotEntry = new Plot()
-                    {
-                        BlockId = blockId,
-                        PlotNumber = block.Name + (i+1).ToString("00000"),
-                        Status = 1,
-                        Price = 155000
-                    };
-                    _realStateUnitOfWork.PlotRepository.Add(plotEntry);
-                    _realStateUnitOfWork.Save();
-                }
-            }
+            return  block;
 
         }
 

@@ -5,7 +5,7 @@ namespace RealState.Core.Services
 {
     public interface IBlockService
     {
-        void AddNewBlock(Block block);
+        Block AddNewBlock(Block block);
         IEnumerable<Block> GetAllBlock();
         Block GetBlockById(int id);
         void EditBlock(Block block);

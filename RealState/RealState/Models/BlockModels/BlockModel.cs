@@ -18,6 +18,8 @@ namespace RealState.Models.BlockModels
         public int NumPlots { get; set; }
         public int NumAvailablePlots { get; set; }
         public int NumSoldPlots { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Plot price is required")]
+        public decimal PlotPrice { get; set; }
 
     }
 }

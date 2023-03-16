@@ -10,18 +10,44 @@ namespace RealState.Core.Services
 {
     public class PlotService : IPlotService
     {
-        private RealStateUnitOfWork _realStateUnitOfWork;
+        private IRealStateUnitOfWork _realStateUnitOfWork;
+
+        public PlotService(IRealStateUnitOfWork realStateUnitOfWork)
+        {
+            _realStateUnitOfWork = realStateUnitOfWork;
+        }
+
         public void AddNewPlot(Plot plot)
         {
-            _realStateUnitOfWork.PlotRepository.Add(plot);
-            _realStateUnitOfWork.Save();
+            if (plot.BlockId > 0)
+            {
+                var blockname = plot.Block.Name;
+                var plotSize = plot.Block.NumPlots;
+
+
+                for (int i = 0; i <= plotSize; i++)
+                {
+                    var plotEntry = new Plot
+                    {
+                        BlockId = plot.BlockId,
+                        PlotNumber = blockname + (i + 1).ToString("00000"),
+                        Status = plot.Status,
+                        Price = plot.Price
+                    };
+
+                    _realStateUnitOfWork.PlotRepository.Add(plotEntry);
+                    _realStateUnitOfWork.Save();
+
+                }
+
+            }
         }
 
         public void EditPlot(Plot plot)
         {
             var previousPlot = _realStateUnitOfWork.PlotRepository.GetById(plot.Id);
 
-            if(previousPlot != null)
+            if (previousPlot != null)
             {
                 previousPlot.PlotNumber = plot.PlotNumber;
                 previousPlot.Status = plot.Status;
