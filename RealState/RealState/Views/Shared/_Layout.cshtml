@@ -199,7 +199,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+          <li class="nav-item ">
             <a asp-controller="Customer" asp-action="Index" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -218,6 +218,29 @@
                 <a asp-controller="Customer" asp-action="Add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a asp-controller="Block" asp-action="Index" class="nav-link active">
+              <i class="nav-icon fas fa-square"></i>
+              <p>
+                Blocks
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a asp-controller="Block" asp-action="Index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Blocks</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a asp-controller="Block" asp-action="Add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create New</p>
                 </a>
               </li>
             </ul>

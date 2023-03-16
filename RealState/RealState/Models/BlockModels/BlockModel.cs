@@ -16,6 +16,8 @@ namespace RealState.Models.BlockModels
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Total number of Plots is required")]
         public int NumPlots { get; set; }
+        public int NumAvailablePlots { get; set; }
+        public int NumSoldPlots { get; set; }
 
     }
 }

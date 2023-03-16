@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RealState.Core.Entity;
+using RealState.Models;
 using RealState.Models.BlockModels;
+using RealState.Models.CustomerModels;
 
 namespace RealState.Controllers
 {
@@ -34,6 +36,24 @@ namespace RealState.Controllers
                 return RedirectToAction(nameof(BlockController.Index));
             }
             return View(blockModel);
+        }
+
+        [HttpGet]
+        public IActionResult GetBlocks()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new BlockViewModel();
+            var blocks = model.GetBlocks(tableModel);
+            return Json(blocks);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var model = new BlockUpdateModel();
+            model.DeleteBlock(id);
+            return RedirectToAction(nameof(CustomerController.Index));
+
         }
 
 
