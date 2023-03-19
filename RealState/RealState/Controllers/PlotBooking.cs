@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealState.Models.PlotBooking;
 
 namespace RealState.Controllers
 {
@@ -11,6 +12,12 @@ namespace RealState.Controllers
 
         [HttpGet]
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(PlotBookingModel plotBookingModel)
         {
             return View();
         }

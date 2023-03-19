@@ -1,42 +1,62 @@
-﻿
+﻿@model RealState.Models.PlotBooking.PlotBookingModel
+
 @{
     ViewData["Title"] = "Book a new Plot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Styles{
 
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-6 offset-3">
-            <form method="post">
-                <div class="form-group">
-                    <label>Block</label>
-                    <select class="form-control" id="Block">
-                        <option>--Select Block--</option>
-                    </select>
+<div class="container-fluid">
+    <div class="row py-4 pl-5">
+        <div class="col-lg-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h2 class="card-title">Book a new Plot</h2>
                 </div>
-                <div class="form-group">
-                    <label>Plot</label>
-                    <select class="form-control" id="Plot">
-                        <option>--Select Plot--</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Customer</label>
-                    <select class="form-control" id="Customer">
-                        <option>--Select Customer--</option>
-                    </select>
-                </div>
+                <form asp-action="Create">
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 offset-1">
+                                <label  class="control-label">Block</label>
+                                <select asp-for="BlockId" class="form-control" id="Block">
+                                    <option >--Select Block--</option>
+                                </select>
+                                <span asp-validation-for="BlockName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4 offset-1">
+                                <label class="control-label">Plot</label>
+                                <select asp-for="PlotId" class="form-control" id="Plot">
+                                    <option>--Select Plot--</option>
+                                </select>
+                                <span asp-validation-for="PlotNumber" class="text-danger"></span>
+                            </div>
 
-            </form>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 offset-1">
+                                <label class="control-label">Customer</label>
+                                <select asp-for="CustomerId" class="form-control" id="Customer">
+                                    <option>--Select Customer--</option>
+                                </select>
+                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                            </div>
+                            <!-- Date -->
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-
     </div>
-
 </div>
+
 
 
 @section Scripts{
@@ -44,4 +64,5 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/plotbooking.js"></script>
+
 }

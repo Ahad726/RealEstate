@@ -28,35 +28,35 @@ namespace RealState.Core
             builder.RegisterType<RealStateContext>()
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
-                   .InstancePerLifetimeScope();
+                   .InstancePerDependency();
 
             builder.RegisterType<RealStateContext>().As<IRealStateContext>()
                      .WithParameter("connectionString", _connectionString)
                      .WithParameter("migrationAssemblyName", _migrationAssemblyName)
-                     .InstancePerLifetimeScope();
+                     .InstancePerDependency();
 
             builder.RegisterType<RealStateUnitOfWork>().As<IRealStateUnitOfWork>()
                  .WithParameter("connectionString", _connectionString)
                  .WithParameter("migrationAssemblyName", _migrationAssemblyName)
-                 .InstancePerLifetimeScope();
+                 .InstancePerDependency();
 
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<CustomerService>().As<ICustomerService>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<BlockRepository>().As<IBlockRepository>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<BlockService>().As<IBlockService>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<PlotRepository>().As<IPlotRepository>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             builder.RegisterType<PlotService>().As<IPlotService>()
-                .InstancePerLifetimeScope();
+                .InstancePerDependency();
 
             base.Load(builder);
         }

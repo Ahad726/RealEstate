@@ -22,7 +22,7 @@ function GetBlock() {
         url: '/Block/FindBlockList',
         success: function (result) {
             $.each(result, function (i, data) {
-                $('#Block').append('<option value=' + data.id + '>' + data.name +'</option > ')
+                $('#Block').append('<option value=' + data.id + '>' + data.name + '</option > ')
             });
         }
     });
