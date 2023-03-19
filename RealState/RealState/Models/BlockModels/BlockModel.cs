@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RealState.Core.Entity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealState.Models.BlockModels
 {
@@ -20,6 +22,8 @@ namespace RealState.Models.BlockModels
         public int NumSoldPlots { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Plot price is required")]
         public decimal PlotPrice { get; set; }
+
+
 
     }
 }

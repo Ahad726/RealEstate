@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using RealState.Core.Entity;
 using RealState.Core.Services;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RealState.Models.CustomerModels
@@ -56,6 +59,24 @@ namespace RealState.Models.CustomerModels
                 Phone = customer.PhoneNumber,
                 Adress = customer.Address
             };
+        }
+
+        public IList<CustomerModel> FindAllCustomer()
+        {
+            var customers = _customerService.GetAllCustomer();
+
+            var customerList = new List<CustomerModel>();
+
+            foreach (var customer in customers)
+            {
+                customerList.Add(new CustomerModel
+                {
+                    Id = customer.Id,
+                    Name = customer.Name
+                });
+            }
+
+            return customerList;
         }
     }
 }

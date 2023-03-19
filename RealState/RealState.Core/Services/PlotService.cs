@@ -1,6 +1,7 @@
 ﻿using RealState.Core.Entity;
 using RealState.Core.UnitOfWorks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,6 +86,11 @@ namespace RealState.Core.Services
         {
             _realStateUnitOfWork.PlotRepository.Remove(id);
             _realStateUnitOfWork.Save();
+        }
+
+        public IEnumerable<Plot> GetPlotsByBlockId(int id)
+        {
+            return _realStateUnitOfWork.PlotRepository.GetAll().Where(p => p.BlockId == id).ToList();
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using Autofac;
+using Newtonsoft.Json.Linq;
+using RealState.Core.Entity;
 using RealState.Core.Services;
 using RealState.Models.CustomerModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RealState.Models.BlockModels
@@ -45,6 +49,24 @@ namespace RealState.Models.BlockModels
                     ).ToArray()
 
             };
+        }
+
+
+        public IEnumerable<BlockModel> GetBlocks()
+        {
+            var blocks =  _blockService.GetAllBlock();
+
+            var blockList = new List<BlockModel>();
+            foreach (var block in blocks)
+            {
+                blockList.Add(new BlockModel
+                {
+                    Id = block.Id,
+                    Name = block.Name,
+                });
+            }
+
+            return blockList;
         }
 
         public BlockModel Load(int id)

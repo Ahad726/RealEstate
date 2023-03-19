@@ -28,7 +28,7 @@ namespace RealState.Data
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public IList<T> GetAll()
+        public virtual IList<T> GetAll()
         {
             return _dbSet.ToList();
         }

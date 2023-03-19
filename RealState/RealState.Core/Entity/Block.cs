@@ -16,7 +16,7 @@ namespace RealState.Core.Entity
         public int NumPlots { get; set; }
         public int NumAvailablePlots { get; set; }
         public int NumSoldPlots { get; set; }
-        public IList<Plot> Plots { get; set; }
+        public IList<Plot> Plots { get; set; } = null;
 
     }
 }

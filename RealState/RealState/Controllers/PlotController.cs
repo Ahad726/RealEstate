@@ -20,5 +20,13 @@ namespace RealState.Controllers
             var plots = model.GetPlots(tableModel);
             return Json(plots);
         }
+
+        public JsonResult FindPlotByBlockId(int id)
+        {
+            var plotVM = new PlotViewModel();
+            var plots = plotVM.GetPlotByBlockId(id);
+
+            return new JsonResult(plots);
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using RealState.Core.Entity;
 using RealState.Core.Services;
 using RealState.Models.PlotModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RealState.Models.PlotModels
@@ -20,7 +23,7 @@ namespace RealState.Models.PlotModels
         {
             int total = 0;
             int totalFiltered = 0;
-            var records = _plotService.GetPlots(tableModel.PageIndex, tableModel.PageSize,tableModel.SearchText,out total, out totalFiltered);
+            var records = _plotService.GetPlots(tableModel.PageIndex, tableModel.PageSize, tableModel.SearchText, out total, out totalFiltered);
 
             return new
             {
@@ -46,6 +49,28 @@ namespace RealState.Models.PlotModels
             return new PlotModel
             {
             };
+        }
+
+        public IEnumerable<PlotModel> GetPlotByBlockId(int id)
+        {
+            var plots = _plotService.GetPlotsByBlockId(id);
+
+            var plotList = new List<PlotModel>();
+
+            foreach (var plot in plots)
+            {
+                plotList.Add(new PlotModel
+                {
+                    Id = plot.Id,
+                    BlockId = plot.BlockId,
+                    PlotNumber = plot.PlotNumber,
+                    Status = plot.Status,
+                    Price= plot.Price,
+
+                });
+            }
+
+            return plotList;
         }
 
     }

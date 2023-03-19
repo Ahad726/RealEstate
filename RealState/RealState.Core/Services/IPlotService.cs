@@ -1,4 +1,5 @@
 ﻿using RealState.Core.Entity;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace RealState.Core.Services
@@ -11,5 +12,6 @@ namespace RealState.Core.Services
         void EditPlot(Plot plot);
         void Remove(int id);
         IEnumerable<Plot> GetPlots(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered);
+        IEnumerable<Plot> GetPlotsByBlockId(int id);
     }
 }

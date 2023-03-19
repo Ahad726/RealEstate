@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using RealState.Core.Entity;
 using RealState.Models;
 using RealState.Models.BlockModels;
 using RealState.Models.CustomerModels;
+using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
@@ -56,6 +58,14 @@ namespace RealState.Controllers
 
         }
 
+        public JsonResult FindBlockList()
+        {
+            var blockVM = new BlockViewModel();
+
+            var blocks = blockVM.GetBlocks();
+
+            return new JsonResult(blocks);
+        }
 
     }
 }

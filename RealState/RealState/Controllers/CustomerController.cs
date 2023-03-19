@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealState.Models;
 using RealState.Models.CustomerModels;
+using RealState.Models.PlotModels;
 using System.Collections.Generic;
 
 namespace RealState.Controllers
@@ -65,6 +66,15 @@ namespace RealState.Controllers
             model.DeleteCustomer(Id);
             return RedirectToAction(nameof(CustomerController.Index));
 
+        }
+
+
+        public JsonResult FindCustomer()
+        {
+            var customerVM = new CustomerViewModel();
+            var customers = customerVM.FindAllCustomer();
+
+            return new JsonResult(customers);
         }
 
     }
