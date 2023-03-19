@@ -14,6 +14,7 @@ namespace RealState.Core.UnitOfWorks
         public ICustomerRepository CustomerRepository { get; set; }
         public IBlockRepository BlockRepository { get; set; }
         public IPlotRepository PlotRepository { get; set; }
+        public IPlotBookingRepository PlotBookingRepository { get; set; }
 
         public RealStateUnitOfWork(string connectionString, string migrationAssemblyName)
             : base(connectionString, migrationAssemblyName)
@@ -21,6 +22,7 @@ namespace RealState.Core.UnitOfWorks
             CustomerRepository = new CustomerRepository(_dbContext);
             BlockRepository = new BlockRepository(_dbContext);
             PlotRepository = new PlotRepository(_dbContext);
+            PlotBookingRepository = new PlotBookingRepository(_dbContext);
         }
     }
 }

@@ -58,6 +58,11 @@ namespace RealState.Core
             builder.RegisterType<PlotService>().As<IPlotService>()
                 .InstancePerDependency();
 
+            builder.RegisterType<PlotBookingRepository>().As<IPlotBookingRepository>()
+                .InstancePerDependency();
+            builder.RegisterType<PlotBookingService>().As<IPlotBookingService>()
+                .InstancePerDependency();
+
             base.Load(builder);
         }
     }

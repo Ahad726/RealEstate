@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealState.Models.BlockModels;
+using RealState.Models;
 using RealState.Models.PlotBooking;
 
 namespace RealState.Controllers
@@ -19,7 +21,18 @@ namespace RealState.Controllers
         [HttpPost]
         public IActionResult Create(PlotBookingModel plotBookingModel)
         {
-            return View();
+            var bookingUM = new PlotBookingUM();
+            bookingUM.BookNewPlot(plotBookingModel);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult GetBookedPlot()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = new PlotBookingVM();
+            var plots = model.GetBookedPlots(tableModel);
+            return Json(plots);
         }
     }
 }

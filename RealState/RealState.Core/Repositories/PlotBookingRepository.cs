@@ -9,16 +9,10 @@ using System.Threading.Tasks;
 
 namespace RealState.Core.Repositories
 {
-    public class CustomerRepository : Repository<Customer> , ICustomerRepository
+    public class PlotBookingRepository : Repository<PlotBooking>, IPlotBookingRepository
     {
-
-        public CustomerRepository(DbContext dbContext)
-            : base(dbContext)
+        public PlotBookingRepository(DbContext dbContext) : base(dbContext)
         {
-
         }
-
-
-
     }
 }
