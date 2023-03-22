@@ -35,7 +35,7 @@ namespace RealState.Models.PlotBooking
                                 record.Id.ToString(),
                                 record.CustomerId.ToString(),
                                 record.PlotId.ToString(),
-                                record.Customer?.Name
+                                record.BookedOn.ToString("dd/MM/yy")
 
                         }
                     ).ToArray()
