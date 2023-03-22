@@ -39,5 +39,10 @@ namespace RealState.Core.Services
                 pageSize,
                 true);
         }
+
+        public IEnumerable<PlotBooking> GetBookedPlots()
+        {
+            return _realStateUnitOfWork.PlotBookingRepository.GetAll();
+        }
     }
 }

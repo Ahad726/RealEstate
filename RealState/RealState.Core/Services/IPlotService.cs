@@ -13,5 +13,6 @@ namespace RealState.Core.Services
         void Remove(int id);
         IEnumerable<Plot> GetPlots(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered);
         IEnumerable<Plot> GetPlotsByBlockId(int id);
+        void CreateSinglePlot(Plot plot);
     }
 }

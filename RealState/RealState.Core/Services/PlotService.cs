@@ -20,7 +20,7 @@ namespace RealState.Core.Services
 
         public void AddNewPlot(Plot plot)
         {
-            if (plot.BlockId > 0)
+            if (plot.Block != null)
             {
                 var blockname = plot.Block.Name;
                 var plotSize = plot.Block.NumPlots;
@@ -40,10 +40,14 @@ namespace RealState.Core.Services
                     _realStateUnitOfWork.Save();
 
                 }
-
             }
         }
 
+        public void CreateSinglePlot(Plot plot)
+        {
+            _realStateUnitOfWork.PlotRepository.Add(plot);
+            _realStateUnitOfWork.Save();
+        }
         public void EditPlot(Plot plot)
         {
             var previousPlot = _realStateUnitOfWork.PlotRepository.GetById(plot.Id);

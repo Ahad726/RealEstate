@@ -13,6 +13,24 @@ namespace RealState.Controllers
         }
 
         [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(PlotModel plotModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var plotUM = new PlotUpdateModel();
+                plotUM.CreateNewPlot(plotModel);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(plotModel);
+        }
+
+        [HttpGet]
         public IActionResult GetPlots()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
