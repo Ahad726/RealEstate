@@ -36,5 +36,13 @@ namespace RealState.Controllers
             var plots = model.GetBookedPlots(tableModel);
             return Json(plots);
         }
+
+        [HttpGet]
+        public IActionResult Vacate(int id)
+        {
+            var bookingUM = new PlotBookingUM();
+            bookingUM.VacateBookedPlot(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

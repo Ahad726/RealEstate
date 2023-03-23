@@ -30,9 +30,9 @@
                     <thead>
                         <tr>
                             <th>Action</th>
-                            <th>Customer</th>
-                            <th>Plot</th>
-                            <th> Booked On</th>
+                            <th>Customer Name</th>
+                            <th>Plot Number</th>
+                            <th> Booking Date</th>
                         </tr>
                     </thead>
                 </table>
@@ -55,6 +55,7 @@
     <!-- page script -->
     <script type="text/javascript">
         $('#tb').DataTable({
+            searching:false,
             processing: true,
             serverSide: true,
             lengthChange: false,
@@ -63,22 +64,13 @@
             ajax: {
                 url: "/PlotBooking/GetBookedPlot",
                 type: "GET",
-                data: function (data) {
-                    for (var i = 0, len = data.columns.length; i < len; i++) {
-                        if (!data.columns[i].search.value) delete data.columns[i].search;
-                        if (data.columns[i].searchable === true) delete data.columns[i].searchable;
-                        if (data.columns[i].orderable === true) delete data.columns[i].orderable;
-                        if (data.columns[i].data === data.columns[i].name) delete data.columns[i].name;
-                    }
-                    delete data.search.regex;
-                }
             },
 
             columnDefs: [
                 {
                     "targets": 0,
                     "render": function (data, type, row) {
-                        return ` <button type="submit" class="btn btn-outline-success btn-sm" onclick="window.location.href='/Block/Edit/${data}'" value=''>
+                        return ` <button type="submit" class="btn btn-outline-success btn-sm" onclick="window.location.href='/PlotBooking/Vacate/${data}'" value=''>
                                                                <i class="fa fa-trash" aria-hidden="true"></i>
                                                        Vacate
                                                    </button> `;

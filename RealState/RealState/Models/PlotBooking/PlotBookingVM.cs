@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using RealState.Core.Services;
+using RealState.Models.BlockModels;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RealState.Models.PlotBooking
@@ -7,10 +9,14 @@ namespace RealState.Models.PlotBooking
     public class PlotBookingVM
     {
         private IPlotBookingService _bookingService;
+        private IPlotService _plotService;
+        private ICustomerService _customerService;
 
         public PlotBookingVM()
         {
             _bookingService = Startup.AutofacContainer.Resolve<IPlotBookingService>();
+            _plotService = Startup.AutofacContainer.Resolve<IPlotService>();
+            _customerService = Startup.AutofacContainer.Resolve<ICustomerService>();
         }
 
 
@@ -25,17 +31,34 @@ namespace RealState.Models.PlotBooking
                 out total,
                 out totalFiltered);
 
+            var bookingModelList = new List<PlotBookingModel>();
+
+            foreach (var bookedPlot in records)
+            {
+                var plotNumber = _plotService.GetPlotById(bookedPlot.PlotId).PlotNumber;
+                var customer = _customerService.GetCustomerById(bookedPlot.CustomerId).Name;
+
+                bookingModelList.Add(new PlotBookingModel
+                {
+                    Id = bookedPlot.Id,
+                    PlotNumber = plotNumber,
+                    CustomerName = customer,
+                    BookedOn = bookedPlot.BookedOn
+                }) ;
+            }
+
+
             return new
             {
                 recordsTotal = total,
                 recordsFiltered = totalFiltered,
-                data = (from record in records
+                data = (from record in bookingModelList
                         select new string[]
                         {
                                 record.Id.ToString(),
-                                record.CustomerId.ToString(),
-                                record.PlotId.ToString(),
-                                record.BookedOn.ToString("dd/MM/YY")
+                                record.CustomerName,
+                                record.PlotNumber,
+                                record.BookedOn.ToString("dd/MM/yy  hh:mm:ss")
 
                         }
                     ).ToArray()

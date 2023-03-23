@@ -44,5 +44,18 @@ namespace RealState.Core.Services
         {
             return _realStateUnitOfWork.PlotBookingRepository.GetAll();
         }
+
+        public PlotBooking GetBookedPlot(int id)
+        {
+            return _realStateUnitOfWork.PlotBookingRepository.GetById(id);
+        }
+
+        public void Delete(int id)
+        {
+            _realStateUnitOfWork.PlotBookingRepository.Remove(id);
+            _realStateUnitOfWork.Save();
+        }
+
+
     }
 }

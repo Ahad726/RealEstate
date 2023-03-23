@@ -33,5 +33,16 @@ namespace RealState.Models.PlotBooking
         }
 
 
+        public void VacateBookedPlot(int id)
+        {
+            var plotId = _plotBookingService.GetBookedPlot(id).PlotId;
+            _plotBookingService.Delete(id);
+
+            var plot = _plotService.GetPlotById(plotId);
+            plot.Status = 1; // plot status 1 when plot is unbooked
+            _plotService.EditPlot(plot);
+        }
+
+
     }
 }
