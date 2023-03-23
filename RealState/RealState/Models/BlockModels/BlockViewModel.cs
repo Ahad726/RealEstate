@@ -12,10 +12,12 @@ namespace RealState.Models.BlockModels
     public class BlockViewModel
     {
         private IBlockService _blockService;
+        private IPlotService _plotService;
 
         public BlockViewModel()
         {
             _blockService = Startup.AutofacContainer.Resolve<IBlockService>();
+            _plotService = Startup.AutofacContainer.Resolve<IPlotService>();
         }
 
 
@@ -30,11 +32,32 @@ namespace RealState.Models.BlockModels
                 out total,
                 out totalFiltered);
 
+
+            var blockModelList = new List<BlockModel>();
+
+            foreach (var block in records)
+            {
+                var PlotByBlockId = _plotService.GetPlotsByBlockId(block.Id);
+
+                var numOfPlots = PlotByBlockId.Count();
+                var soldPlots = PlotByBlockId.Where(x => x.Status == 0).Count();
+
+                blockModelList.Add(new BlockModel
+                {
+                    Id = block.Id,
+                    Name = block.Name,
+                    City = block.City,
+                    NumPlots = numOfPlots,
+                    NumAvailablePlots = numOfPlots - soldPlots,
+                    NumSoldPlots = soldPlots
+                });
+            }
+
             return new
             {
                 recordsTotal = total,
                 recordsFiltered = totalFiltered,
-                data = (from record in records
+                data = (from record in blockModelList
                         select new string[]
                         {
                                 record.Id.ToString(),
