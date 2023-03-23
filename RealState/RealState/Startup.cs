@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using RealState.Core;
 using RealState.Core.Context;
 using RealState.Data;
+using RealState.DataSeed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,13 +61,16 @@ namespace RealState
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<IDbInitializer, DbInitializer>();
+
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,6 +89,8 @@ namespace RealState
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            dbInitializer.InitializeAsync();
 
             app.UseEndpoints(endpoints =>
             {
