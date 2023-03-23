@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using RealState.Core.Entity;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class BlockController : Controller
     {
         private readonly ILogger<HomeController> _logger;

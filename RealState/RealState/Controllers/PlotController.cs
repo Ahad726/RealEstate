@@ -2,9 +2,11 @@
 using RealState.Models.BlockModels;
 using RealState.Models;
 using RealState.Models.PlotModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class PlotController : Controller
     {
         public IActionResult Index()

@@ -2,9 +2,11 @@
 using RealState.Models.BlockModels;
 using RealState.Models;
 using RealState.Models.PlotBooking;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class PlotBooking : Controller
     {
         public IActionResult Index()

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RealState.Models;
 using RealState.Models.CustomerModels;
 using RealState.Models.PlotModels;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         public IActionResult Index()
