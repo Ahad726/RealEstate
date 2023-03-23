@@ -27,29 +27,11 @@ namespace RealState.Models.PlotBooking
                 BookedOn = DateTime.Today.Date
             }) ;
 
-            UpdatePlotCountOnBlock(bookingModel.BlockId);
-            UpdatePlotStatus(bookingModel.PlotId);
+            var plot = _plotService.GetPlotById(bookingModel.PlotId);
+            plot.Status = 0;
+            _plotService.EditPlot(plot);
         }
 
-        private void UpdatePlotStatus(int plotId)
-        {
-            var plot = _plotService.GetPlotById(plotId);
-            if (plot != null)
-            {
-                plot.Status = 0;
-                _plotService.EditPlot(plot);
-            }
-        }
 
-        private void UpdatePlotCountOnBlock(int id)
-        {
-            var block = _blockService.GetBlockById(id);
-            if (block != null)
-            {
-                block.NumAvailablePlots -= 1;
-                block.NumSoldPlots += 1;
-                _blockService.EditBlock(block);
-            }
-        }
     }
 }
