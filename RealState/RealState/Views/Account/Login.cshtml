@@ -30,9 +30,9 @@
             <div class="login-card-body p-lg-5">
 
                 <form id="account" method="post">
-                    <p class="card-title">Sign in to start your session</p>
+                    <p class="card-title col-md-8 offset-2">Sign in to start your session</p>
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="input-group pt-2">
+                    <div class="input-group pb-2 col-md-8 offset-2">
                         <input type="email" asp-for="Email" class="form-control" placeholder="Enter Email" />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group pt-2">
+                    <div class="input-group pb-2 col-md-8 offset-2">
                         <input type="password" asp-for="Password" class="form-control" placeholder="Enter Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -49,15 +49,7 @@
                         </div>
                     </div>
                     <div class="row pt-3">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" asp-for="RememberMe" id="remember" value="false">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-4">
+                        <div class="col-md-4 offset-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                     </div>
