@@ -63,6 +63,22 @@ namespace RealState.Core
             builder.RegisterType<PlotBookingService>().As<IPlotBookingService>()
                 .InstancePerDependency();
 
+            builder.RegisterType<AccountRepository>().As<IAccountRepository>()
+               .InstancePerDependency();
+            builder.RegisterType<AccountService>().As<IAccountService>()
+                .InstancePerDependency();
+
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
+               .InstancePerDependency();
+            builder.RegisterType<CategoryService>().As<ICategoryService>()
+                .InstancePerDependency();
+
+            builder.RegisterType<TransactionRepository>().As<ITransactionRepository>()
+               .InstancePerDependency();
+            builder.RegisterType<TransactionService>().As<ITransactionService>()
+                .InstancePerDependency();
+
+
             base.Load(builder);
         }
     }

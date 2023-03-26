@@ -17,6 +17,9 @@ namespace RealState.Core.Context
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Plot> Plots { get; set; }
         public DbSet<PlotBooking> PlotBookings { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public RealStateContext(string connectionString, string migrationAssemblyName)
         {

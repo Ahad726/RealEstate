@@ -19,28 +19,17 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
-        .bg-image {
-            opacity: 0.9;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: auto;
+        body {
+            background-color:lightcyan;
         }
     </style>
     @RenderSection("Styles", false)
 </head>
 
 <body class="login-body">
-    <img class="bg-image"
-         src="../../img/monster_air_bg.jpeg"
-         alt="">
-    @RenderBody()
-    <!-- /.login-card-body -->
-    <!--</div>
-        </div>
-    </div>-->
-    <!-- /.login-box -->
+    <div class="login-box" style="z-index:-1;">
+        @RenderBody()
+    </div>
     <!-- jQuery -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
