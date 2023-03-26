@@ -1,4 +1,5 @@
 ﻿using RealState.Core.Entity;
+using RealState.Core.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,19 @@ namespace RealState.Core.Services
 {
     public class CategoryService : ICategoryService
     {
-        public Category AddNewCategory(Category block)
+        private IRealStateUnitOfWork _realStateUnitOfWork;
+
+        public CategoryService(IRealStateUnitOfWork realStateUnitOfWork)
         {
-            throw new NotImplementedException();
+            _realStateUnitOfWork = realStateUnitOfWork;
+        }
+        public void AddNewCategory(Category category)
+        {
+            _realStateUnitOfWork.CategoryRepository.Add(category);
+            _realStateUnitOfWork.Save();
         }
 
-        public void EditCategory(Category block)
+        public void EditCategory(Category category)
         {
             throw new NotImplementedException();
         }
@@ -31,12 +39,22 @@ namespace RealState.Core.Services
 
         public IEnumerable<Category> GetCategorys(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.CategoryRepository.Get(
+
+                out total,
+                out totalFiltered,
+                 x => x.Name.Contains(searchText),
+                null,
+                "",
+                pageIndex,
+                pageSize,
+                true);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _realStateUnitOfWork.CategoryRepository.Remove(id);
+            _realStateUnitOfWork.Save();
         }
     }
 }

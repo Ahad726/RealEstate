@@ -5,7 +5,7 @@ namespace RealState.Core.Services
 {
     public interface ICategoryService
     {
-        Category AddNewCategory(Category block);
+        void AddNewCategory(Category block);
         IEnumerable<Category> GetAllCategory();
         Category GetCategoryById(int id);
         void EditCategory(Category block);

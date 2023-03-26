@@ -15,6 +15,9 @@ namespace RealState.Core.UnitOfWorks
         IBlockRepository BlockRepository { get; set; }
         IPlotRepository PlotRepository { get; set; }
         IPlotBookingRepository PlotBookingRepository { get; set; }
+        IAccountRepository AccountRepository { get; set; }
+        ICategoryRepository CategoryRepository { get; set; }
+        ITransactionRepository TransactionRepository { get; set; }
 
     }
 }
