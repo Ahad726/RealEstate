@@ -16,12 +16,13 @@ namespace RealState.Core.Services
             _realStateUnitOfWork = realStateUnitOfWork;
         }
 
-        public Account AddNewAccount(Account block)
+        public void AddNewAccount(Account account)
         {
-            throw new NotImplementedException();
+            _realStateUnitOfWork.AccountRepository.Add(account);
+            _realStateUnitOfWork.Save();
         }
 
-        public void EditAccount(Account block)
+        public void EditAccount(Account account)
         {
             throw new NotImplementedException();
         }
@@ -33,17 +34,27 @@ namespace RealState.Core.Services
 
         public IEnumerable<Account> GetAccounts(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.AccountRepository.Get(
+
+                out total,
+                out totalFiltered,
+                 x => x.Name.Contains(searchText),
+                null,
+                "",
+                pageIndex,
+                pageSize,
+                true);
         }
 
         public IEnumerable<Account> GetAllAccount()
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.AccountRepository.GetAll();
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _realStateUnitOfWork.AccountRepository.Remove(id);
+            _realStateUnitOfWork.Save();
         }
     }
 }

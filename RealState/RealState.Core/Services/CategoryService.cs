@@ -29,7 +29,7 @@ namespace RealState.Core.Services
 
         public IEnumerable<Category> GetAllCategory()
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.CategoryRepository.GetAll();
         }
 
         public Category GetCategoryById(int id)

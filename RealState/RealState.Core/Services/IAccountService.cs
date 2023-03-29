@@ -5,7 +5,7 @@ namespace RealState.Core.Services
 {
     public interface IAccountService
     {
-        Account AddNewAccount(Account block);
+        void AddNewAccount(Account block);
         IEnumerable<Account> GetAllAccount();
         Account GetAccountById(int id);
         void EditAccount(Account block);
