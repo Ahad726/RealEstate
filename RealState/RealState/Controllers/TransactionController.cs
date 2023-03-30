@@ -8,5 +8,10 @@ namespace RealState.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateExpense()
+        {
+            return View();
+        }
     }
 }

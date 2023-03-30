@@ -1,0 +1,76 @@
+﻿@model RealState.Models.TransactionModels.TransactionModel
+@{
+    ViewData["Title"] = "Create Expense";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+
+}
+
+<div class="container-fluid">
+    <div class="row py-4 pl-5">
+        <div class="col-lg-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h2 class="card-title">Create a new Expense</h2>
+                </div>
+                <form asp-action="Create">
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Account</label>
+                                <select asp-for="AccountId" class="form-control" id="account">
+                                    <option>--Select--</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Category</label>
+                                <select asp-for="CategoryId" class="form-control" id="category">
+                                    <option>--Select--</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="Amount" class="control-label">Amount</label>
+                                <input asp-for="Amount" type="number" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="DateTime" class="control-label">Customer</label>
+                                
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Customer</label>
+                                <select asp-for="ImageUrl" class="form-control" >
+                                    <option>--Select Customer--</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <label asp-for="Description" class="control-label col-12">Description</label>
+                                <textarea asp-for="Description" class="control-label col-12" rows="" style="line-height:1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/transaction.js"></script>
+}
