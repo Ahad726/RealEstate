@@ -1,4 +1,5 @@
-﻿using RealState.Core.Entity;
+﻿using Microsoft.AspNetCore.Http;
+using RealState.Core.Entity;
 using System;
 
 namespace RealState.Models.TransactionModels
@@ -9,6 +10,7 @@ namespace RealState.Models.TransactionModels
         public decimal Amount { get; set; }
         public string Description { get; set; }
         public DateTime DateTime { get; set; }
+        public IFormFile ImageFile { get; set; }
         public string ImageUrl { get; set; }
         public int Flag { get; set; }
         public int AccountId { get; set; }

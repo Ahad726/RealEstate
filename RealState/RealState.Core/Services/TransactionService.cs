@@ -1,4 +1,5 @@
 ﻿using RealState.Core.Entity;
+using RealState.Core.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,15 @@ namespace RealState.Core.Services
 {
     public class TransactionService : ITransactionService
     {
-        public Transaction AddNewTransaction(Transaction block)
+        private IRealStateUnitOfWork _realStateUnitOfWork;
+        public TransactionService( IRealStateUnitOfWork realStateUnitOfWork)
         {
-            throw new NotImplementedException();
+            _realStateUnitOfWork = realStateUnitOfWork;
+        }
+        public void AddNewTransaction(Transaction transaction)
+        {
+            _realStateUnitOfWork.TransactionRepository.Add(transaction);
+            _realStateUnitOfWork.Save();
         }
 
         public void EditTransaction(Transaction block)

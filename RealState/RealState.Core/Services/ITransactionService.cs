@@ -5,7 +5,7 @@ namespace RealState.Core.Services
 {
     public interface ITransactionService
     {
-        Transaction AddNewTransaction(Transaction block);
+        void AddNewTransaction(Transaction transaction);
         IEnumerable<Transaction> GetAllTransaction();
         Transaction GetTransactionById(int id);
         void EditTransaction(Transaction block);
