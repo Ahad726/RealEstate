@@ -29,7 +29,7 @@ namespace RealState.Core.Services
 
         public Account GetAccountById(int id)
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.AccountRepository.GetById(id);
         }
 
         public IEnumerable<Account> GetAccounts(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)

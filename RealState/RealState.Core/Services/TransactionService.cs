@@ -28,7 +28,7 @@ namespace RealState.Core.Services
 
         public IEnumerable<Transaction> GetAllTransaction()
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.TransactionRepository.GetAll();
         }
 
         public Transaction GetTransactionById(int id)
@@ -38,7 +38,16 @@ namespace RealState.Core.Services
 
         public IEnumerable<Transaction> GetTransactions(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.TransactionRepository.Get(
+
+               out total,
+               out totalFiltered,
+                x => x.Flag == -1,
+               null,
+               "",
+               pageIndex,
+               pageSize,
+               true);
         }
 
         public void Remove(int id)

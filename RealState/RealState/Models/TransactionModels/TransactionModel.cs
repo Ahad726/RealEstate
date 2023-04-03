@@ -9,7 +9,8 @@ namespace RealState.Models.TransactionModels
         public int Id { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
         public IFormFile ImageFile { get; set; }
         public string ImageUrl { get; set; }
         public int Flag { get; set; }

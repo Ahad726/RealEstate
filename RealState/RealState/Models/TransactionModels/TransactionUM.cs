@@ -29,8 +29,8 @@ namespace RealState.Models.TransactionModels
                 ImageUrl = transaction.ImageUrl,
                 CategoryId = transaction.CategoryId,
                 AccountId = transaction.AccountId,
-                Date = transaction.DateTime.Date,
-                Time = transaction.DateTime.TimeOfDay,
+                Date = transaction.Date.Date,
+                Time = transaction.Date.TimeOfDay,
                 Flag = TransactionType.Expense
             });
         }
@@ -43,8 +43,8 @@ namespace RealState.Models.TransactionModels
                 ImageUrl = transaction.ImageUrl,
                 CategoryId = transaction.CategoryId,
                 AccountId = transaction.AccountId,
-                Date = transaction.DateTime.Date,
-                Time = transaction.DateTime.TimeOfDay,
+                Date = transaction.Date.Date,
+                Time = transaction.Date.TimeOfDay,
                 Flag = TransactionType.Income
             });
         }

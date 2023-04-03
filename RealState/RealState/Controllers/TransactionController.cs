@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
+using RealState.Models;
 
 namespace RealState.Controllers
 {
@@ -16,6 +17,13 @@ namespace RealState.Controllers
             _hostEnvironment = hostEnvironment;
         }
         public IActionResult Index()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetExpenses()
         {
             return View();
         }
@@ -31,14 +39,13 @@ namespace RealState.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var trasacModel = new TransactionUM();
                 string webRootPath = _hostEnvironment.WebRootPath;
 
                 if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
                 {
 
-                    string fileName = Guid.NewGuid().ToString();
+                    string fileName = transactionModel.ImageFile.FileName;
                     var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -51,7 +58,7 @@ namespace RealState.Controllers
 
 
                 trasacModel.AddExpense(transactionModel);
-                return RedirectToAction("Index");
+                return RedirectToAction("GetExpenses");
 
             }
             return View(transactionModel);
@@ -92,6 +99,15 @@ namespace RealState.Controllers
 
             }
             return View(transactionModel);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllExpense()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var transacModel = new TransactionVM();
+            var transactions = transacModel.GetExpenses(tableModel);
+            return Json(transactions);
         }
 
     }

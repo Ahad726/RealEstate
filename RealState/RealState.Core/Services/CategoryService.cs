@@ -34,7 +34,7 @@ namespace RealState.Core.Services
 
         public Category GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return _realStateUnitOfWork.CategoryRepository.GetById(id);
         }
 
         public IEnumerable<Category> GetCategorys(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered)
