@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using RealState.Core.Entity;
 using RealState.Core.Services;
 using RealState.SD;
+using System;
+using System.IO;
 
 namespace RealState.Models.TransactionModels
 {
@@ -47,6 +49,24 @@ namespace RealState.Models.TransactionModels
                 Time = transaction.Date.TimeOfDay,
                 Flag = TransactionType.Income
             });
+        }
+
+        internal void DeleteTransaction(int id)
+        {
+            var transction = _transactionService.GetTransactionById(id);
+
+            if(transction.ImageUrl != null)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", transction.ImageUrl);
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+
+            }
+
+            _transactionService.Remove(id);
         }
     }
 }

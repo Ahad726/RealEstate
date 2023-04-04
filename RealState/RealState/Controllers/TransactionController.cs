@@ -6,6 +6,7 @@ using System;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using RealState.Models;
+using RealState.Models.BlockModels;
 
 namespace RealState.Controllers
 {
@@ -95,10 +96,19 @@ namespace RealState.Controllers
 
 
                 trasacModel.AddIncome(transactionModel);
-                return RedirectToAction("Index");
+                return RedirectToAction("GetExpenses");
 
             }
             return View(transactionModel);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var model = new TransactionUM();
+            model.DeleteTransaction(id);
+            return RedirectToAction("GetExpenses");
+
         }
 
         [HttpGet]

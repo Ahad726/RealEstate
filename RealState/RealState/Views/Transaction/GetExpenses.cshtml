@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Expense List";
 }
 
@@ -73,15 +72,21 @@
                 {
                     "targets": 0,
                     "render": function (data, type, row) {
-                        return ` <a type="submit" class="btn btn-outline-success btn-sm" onclick="window.location.href='/PlotBooking/Vacate/${data}'" value=''>
-                                                                       <i class="fa fa-trash" aria-hidden="true"></i>
-                                                           </a> `;
-                    },
-                    "targets": -1,
-                    "render": function (data, type,  meta) {
-                        return '<img src="/images/' + data + '" style="width: 100px; height: 100px;"/>';
+                        return `
+                                 <button type="submit" class="ml-sm-2 btn btn-outline-danger btn-sm" onclick="window.location.href='/Transaction/Delete/${data}'" value=''>
+                                    <i class="fas fa-trash"></i>
+                                 </button>
+                              `;
                     }
+                },
+                {
+
+                "targets": -1,
+                "render": function (data, type, meta) {
+                    return '<img src="/images/' + data + '" style="width: 40px; height: 60px;"/>';
                 }
+                }
+
             ]
         });
 
