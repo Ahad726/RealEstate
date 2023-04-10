@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using RealState.Core.Entity;
 using System;
+using System.ComponentModel;
 
 namespace RealState.Models.TransactionModels
 {
@@ -12,6 +13,7 @@ namespace RealState.Models.TransactionModels
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public IFormFile ImageFile { get; set; }
+        [DisplayName("Transaction Slip")]
         public string ImageUrl { get; set; }
         public int Flag { get; set; }
         public int AccountId { get; set; }

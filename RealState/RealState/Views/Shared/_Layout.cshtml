@@ -329,5 +329,18 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/dist/js/pages/dashboard.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        /* menu active */
+        $(function ($) {
+            let url = window.location.href;
+            $('.nav-link').each(function () {
+                if (this.href === url) {
+                    //$(this).closest('.nav-link').addClass('active');
+                    $(this).parents("li").last().toggleClass("menu-is-opening menu-open");
+                    $(this).parents("li ul").last().css("display", "block");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

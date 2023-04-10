@@ -30,6 +30,12 @@ namespace RealState.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetIncome()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult CreateExpense()
         {
             return View();
@@ -113,6 +119,16 @@ namespace RealState.Controllers
 
         [HttpGet]
         public IActionResult GetAllExpense()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var transacModel = new TransactionVM();
+            var transactions = transacModel.GetExpenses(tableModel);
+            return Json(transactions);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllIncome()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var transacModel = new TransactionVM();
