@@ -41,7 +41,7 @@ namespace RealState.DataSeed
                 return;
             }
 
-            // Create Admin and manager Role
+            // Create Admin Role
             roleManager.CreateAsync(new IdentityRole("Admin")).GetAwaiter().GetResult();
 
             //Create user 

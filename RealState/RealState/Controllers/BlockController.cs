@@ -6,11 +6,12 @@ using RealState.Core.Entity;
 using RealState.Models;
 using RealState.Models.BlockModels;
 using RealState.Models.CustomerModels;
+using RealState.SD;
 using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class BlockController : Controller
     {
         private readonly ILogger<HomeController> _logger;
