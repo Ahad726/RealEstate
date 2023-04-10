@@ -32,7 +32,7 @@ namespace RealState.Models.TransactionModels
                 tableModel.PageSize,
                 tableModel.SearchText,
                 out total,
-                out totalFiltered);
+                out totalFiltered).Where(f => f.Flag == -1);
 
             var expenselList = new List<TransactionModel>();
 
@@ -62,6 +62,60 @@ namespace RealState.Models.TransactionModels
                 recordsTotal = total,
                 recordsFiltered = totalFiltered,
                 data = (from record in expenselList
+                        select new string[]
+                        {
+                                record.Id.ToString(),
+                                record.AccountName,
+                                record.CategoryName,
+                                record.Amount.ToString(),
+                                record.Date.ToString("MM/dd/yyyy"),
+                                record.Time.ToString(),
+                                record.ImageUrl
+                        }
+                    ).ToArray()
+
+            };
+        }
+
+        public object GetIncome(DataTablesAjaxRequestModel tableModel)
+        {
+            int total = 0;
+            int totalFiltered = 0;
+            var records = _transactionService.GetTransactions(
+                tableModel.PageIndex,
+                tableModel.PageSize,
+                tableModel.SearchText,
+                out total,
+                out totalFiltered).Where(f => f.Flag == 1);
+
+            var incomeList = new List<TransactionModel>();
+
+            foreach (var income in records)
+            {
+                var category = _categoryService.GetCategoryById(income.CategoryId).Name;
+                var accountName = _accountService.GetAccountById(income.AccountId).Name;
+
+                incomeList.Add(new TransactionModel
+                {
+                    Id = income.Id,
+                    AccountId = income.AccountId,
+                    Description = income.Description,
+                    Amount = income.Amount,
+                    Date = income.Date,
+                    Time = income.Time,
+                    ImageUrl = income.ImageUrl,
+                    AccountName = accountName,
+                    CategoryName = category
+
+                }); ;
+            }
+
+
+            return new
+            {
+                recordsTotal = total,
+                recordsFiltered = totalFiltered,
+                data = (from record in incomeList
                         select new string[]
                         {
                                 record.Id.ToString(),

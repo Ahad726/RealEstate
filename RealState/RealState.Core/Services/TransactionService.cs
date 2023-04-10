@@ -42,7 +42,7 @@ namespace RealState.Core.Services
 
                out total,
                out totalFiltered,
-                x => x.Flag == -1,
+               null,
                null,
                "",
                pageIndex,

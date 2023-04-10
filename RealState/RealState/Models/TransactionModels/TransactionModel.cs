@@ -2,6 +2,7 @@
 using RealState.Core.Entity;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealState.Models.TransactionModels
 {
@@ -13,7 +14,8 @@ namespace RealState.Models.TransactionModels
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public IFormFile ImageFile { get; set; }
-        [DisplayName("Transaction Slip")]
+
+        [Display(Name ="Transaction Slip")]
         public string ImageUrl { get; set; }
         public int Flag { get; set; }
         public int AccountId { get; set; }

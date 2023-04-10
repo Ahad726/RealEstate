@@ -82,14 +82,13 @@ namespace RealState.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var trasacModel = new TransactionUM();
                 string webRootPath = _hostEnvironment.WebRootPath;
 
                 if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
                 {
 
-                    string fileName = Guid.NewGuid().ToString();
+                    string fileName = transactionModel.ImageFile.FileName;
                     var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -102,7 +101,7 @@ namespace RealState.Controllers
 
 
                 trasacModel.AddIncome(transactionModel);
-                return RedirectToAction("GetExpenses");
+                return RedirectToAction("GetIncome");
 
             }
             return View(transactionModel);
@@ -132,7 +131,7 @@ namespace RealState.Controllers
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
             var transacModel = new TransactionVM();
-            var transactions = transacModel.GetExpenses(tableModel);
+            var transactions = transacModel.GetIncome(tableModel);
             return Json(transactions);
         }
 
