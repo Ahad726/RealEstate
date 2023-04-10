@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealState.Models.DepartmentModels;
 using RealState.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         public IActionResult Index()

@@ -7,9 +7,11 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using RealState.Models;
 using RealState.Models.BlockModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly IWebHostEnvironment _hostEnvironment;

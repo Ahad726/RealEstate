@@ -2,9 +2,11 @@
 using RealState.Models.BlockModels;
 using RealState.Models;
 using RealState.Models.CategoryModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealState.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         public IActionResult Index()
