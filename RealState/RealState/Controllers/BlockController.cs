@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace RealState.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = RoleType.Role_Employee)]
     public class BlockController : Controller
     {
         private readonly ILogger<HomeController> _logger;

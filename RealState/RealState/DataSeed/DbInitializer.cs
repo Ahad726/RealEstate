@@ -5,6 +5,7 @@ using System;
 using RealState.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using RealState.SD;
 
 namespace RealState.DataSeed
 {
@@ -43,6 +44,10 @@ namespace RealState.DataSeed
 
             // Create Admin Role
             roleManager.CreateAsync(new IdentityRole("Admin")).GetAwaiter().GetResult();
+
+            // Create other Role
+            roleManager.CreateAsync(new IdentityRole(RoleType.Role_Manager)).GetAwaiter().GetResult();
+            roleManager.CreateAsync(new IdentityRole(RoleType.Role_Employee)).GetAwaiter().GetResult();
 
             //Create user 
             userManager.CreateAsync(new IdentityUser
