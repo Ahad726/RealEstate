@@ -1,6 +1,9 @@
 ﻿using Autofac;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using RealState.Core.Entity;
 using RealState.Core.Services;
 using RealState.Models.PlotBooking;
+using RealState.SD;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -129,6 +132,76 @@ namespace RealState.Models.TransactionModels
                     ).ToArray()
 
             };
+        }
+
+        public IEnumerable<TransactionModel> GetIncome()
+        {
+            var incomes = _transactionService.GetAllTransaction().Where(t => t.Flag == TransactionType.Income);
+
+            var incomeList = new List<TransactionModel>();
+
+            foreach (var income in incomes)
+            {
+                var category = _categoryService.GetCategoryById(income.CategoryId).Name;
+                var accountName = _accountService.GetAccountById(income.AccountId).Name;
+
+                incomeList.Add(new TransactionModel
+                {
+                    Id = income.Id,
+                    AccountId = income.AccountId,
+                    Description = income.Description,
+                    Amount = income.Amount,
+                    Date = income.Date,
+                    Time = income.Time,
+                    ImageUrl = income.ImageUrl,
+                    AccountName = accountName,
+                    CategoryName = category
+
+                }); ;
+            }
+
+
+            return incomeList;
+        }
+
+        internal object IncomeByCategory(int id)
+        {
+            var incomes = _transactionService.GetAllTransaction().Where(t => t.CategoryId == id);
+
+
+
+            var incomeList = new List<TransactionModel>();
+
+            foreach (var income in incomes)
+            {
+                var category = _categoryService.GetCategoryById(income.CategoryId).Name;
+                var accountName = _accountService.GetAccountById(income.AccountId).Name;
+
+                incomeList.Add(new TransactionModel
+                {
+                    Amount = income.Amount,
+                    Date = income.Date,
+                    Time = income.Time,
+                    AccountName = accountName,
+                });
+            }
+
+            //return incomeList;
+
+            return new
+            {
+                data = (from record in incomeList
+                        select new string[]
+                        {
+                                record.Amount.ToString(),
+                                record.Date.ToString("MM/dd/yyyy"),
+                                record.Time.ToString(),
+                                record.AccountName
+                        }
+                    ).ToArray()
+
+            };
+
         }
     }
 }

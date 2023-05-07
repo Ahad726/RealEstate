@@ -28,7 +28,8 @@ namespace RealState.Core.Services
 
         public IEnumerable<Transaction> GetAllTransaction()
         {
-            return _realStateUnitOfWork.TransactionRepository.GetAll();
+            var alltransactions =  _realStateUnitOfWork.TransactionRepository.GetAll();
+            return alltransactions;
         }
 
         public Transaction GetTransactionById(int id)

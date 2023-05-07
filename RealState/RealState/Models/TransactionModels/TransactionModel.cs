@@ -19,8 +19,10 @@ namespace RealState.Models.TransactionModels
         public string ImageUrl { get; set; }
         public int Flag { get; set; }
         public int AccountId { get; set; }
+        [DisplayName("Account")]
         public string AccountName { get; set; }
         public int CategoryId { get; set; }
+        [DisplayName("Category")]
         public string CategoryName { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace RealState.Controllers
         }
         public IActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -46,31 +46,28 @@ namespace RealState.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateExpense(TransactionModel transactionModel)
         {
-            if (ModelState.IsValid)
+
+            var trasacModel = new TransactionUM();
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+            if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
             {
-                var trasacModel = new TransactionUM();
-                string webRootPath = _hostEnvironment.WebRootPath;
 
-                if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
+                string fileName = transactionModel.ImageFile.FileName;
+                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-
-                    string fileName = transactionModel.ImageFile.FileName;
-                    var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await transactionModel.ImageFile.CopyToAsync(fileStream);
-                    }
-
-                    transactionModel.ImageUrl = fileName;
+                    await transactionModel.ImageFile.CopyToAsync(fileStream);
                 }
 
-
-                trasacModel.AddExpense(transactionModel);
-                return RedirectToAction("GetExpenses");
-
+                transactionModel.ImageUrl = fileName;
             }
-            return View(transactionModel);
+
+
+            trasacModel.AddExpense(transactionModel);
+            return RedirectToAction("GetExpenses");
+
         }
 
         [HttpGet]
@@ -82,31 +79,30 @@ namespace RealState.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateIncome(TransactionModel transactionModel)
         {
-            if (ModelState.IsValid)
+
+            var trasacModel = new TransactionUM();
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+            if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
             {
-                var trasacModel = new TransactionUM();
-                string webRootPath = _hostEnvironment.WebRootPath;
 
-                if (transactionModel.ImageFile != null && transactionModel.ImageFile.Length > 0)
+                string fileName = transactionModel.ImageFile.FileName;
+                var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-
-                    string fileName = transactionModel.ImageFile.FileName;
-                    var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await transactionModel.ImageFile.CopyToAsync(fileStream);
-                    }
-
-                    transactionModel.ImageUrl = fileName;
+                    await transactionModel.ImageFile.CopyToAsync(fileStream);
                 }
 
-
-                trasacModel.AddIncome(transactionModel);
-                return RedirectToAction("GetIncome");
-
+                transactionModel.ImageUrl = fileName;
             }
-            return View(transactionModel);
+
+
+            trasacModel.AddIncome(transactionModel);
+            return RedirectToAction("GetIncome");
+
+
+
         }
 
         [HttpGet]
@@ -129,6 +125,15 @@ namespace RealState.Controllers
 
 
         [HttpGet]
+        public IActionResult FindAllExpenses()
+        {
+            var transacModel = new TransactionUM();
+            var transactions = transacModel.GetExpenses();
+            return Json(transactions);
+        }
+
+
+        [HttpGet]
         public IActionResult GetAllIncome()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
@@ -136,6 +141,24 @@ namespace RealState.Controllers
             var transactions = transacModel.GetIncome(tableModel);
             return Json(transactions);
         }
+
+        [HttpGet]
+        public IActionResult ListIncome()
+        {
+            var transactionModel = new TransactionVM();
+            var allIncome = transactionModel.GetIncome();
+            return View(allIncome);
+        }
+
+        [HttpGet]
+        public JsonResult GetIncomeByCategory(int id)
+        {
+            var transactionModel = new TransactionVM();
+            var allIncome = transactionModel.IncomeByCategory(id);
+            var jsonObj = new JsonResult(allIncome);
+            return jsonObj;
+        }
+
 
     }
 }
