@@ -136,7 +136,8 @@ namespace RealState.Models.TransactionModels
 
         public IEnumerable<TransactionModel> GetIncome()
         {
-            var incomes = _transactionService.GetAllTransaction().Where(t => t.Flag == TransactionType.Income);
+            //var incomes = _transactionService.GetAllTransaction().Where(t => t.Flag == TransactionType.Income);
+            var incomes = _transactionService.GetTransactionBySP().Where(t => t.Flag == TransactionType.Income);
 
             var incomeList = new List<TransactionModel>();
 

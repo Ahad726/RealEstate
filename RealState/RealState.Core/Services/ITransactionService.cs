@@ -11,5 +11,6 @@ namespace RealState.Core.Services
         void EditTransaction(Transaction block);
         void Remove(int id);
         IEnumerable<Transaction> GetTransactions(int pageIndex, int pageSize, string searchText, out int total, out int totalFiltered);
+        IList<Transaction> GetTransactionBySP();
     }
 }

@@ -56,5 +56,10 @@ namespace RealState.Core.Services
             _realStateUnitOfWork.TransactionRepository.Remove(id);
             _realStateUnitOfWork.Save();
         }
+
+        public IList<Transaction> GetTransactionBySP()
+        {
+            return _realStateUnitOfWork.TransactionRepository.GetTransactionsBySP();
+        }
     }
 }
