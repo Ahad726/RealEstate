@@ -22,7 +22,7 @@ namespace RealState.Core.Repositories
 
         public IList<Transaction> GetTransactionsBySP()
         {
-            var allTransaction = _transactionDb.FromSqlInterpolated<Transaction>($"exec {getTransactionSP}").ToList();
+            var allTransaction = _transactionDb.FromSqlRaw($"exec {getTransactionSP}").ToList();
             return allTransaction;
         }
     }
