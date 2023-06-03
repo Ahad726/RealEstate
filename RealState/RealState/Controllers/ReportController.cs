@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealState.Core.NotMapped;
 
 namespace RealState.Controllers
 {
@@ -9,8 +10,11 @@ namespace RealState.Controllers
             return View();
         }
 
-        public IActionResult Income()
+        public IActionResult Income(TransactionQuery model)
         {
+            model.SortBy = "Created";
+            model.PageSize = 10;
+
             return View();
         }
     }
