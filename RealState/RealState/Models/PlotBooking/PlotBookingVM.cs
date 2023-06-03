@@ -65,5 +65,10 @@ namespace RealState.Models.PlotBooking
 
             };
         }
+
+        public int GetBookedPlotCount()
+        {
+            return _bookingService.GetBookedPlots().Count();
+        }
     }
 }

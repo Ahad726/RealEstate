@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RealState.Core.UnitOfWorks;
+using RealState.Data;
 using RealState.Models;
+using RealState.Models.PlotBooking;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,11 +21,14 @@ namespace RealState.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
         }
 
         [Authorize]
         public IActionResult Index()
         {
+            var bookedPlotCount = new PlotBookingVM().GetBookedPlotCount();
+            ViewBag.BookedPlotCount = bookedPlotCount;
             return View();
         }
 
