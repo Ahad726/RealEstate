@@ -59,15 +59,18 @@ namespace RealState.Models.PlotModels
 
             foreach (var plot in plots)
             {
-                plotList.Add(new PlotModel
+                if(plot.Status != 0)
                 {
-                    Id = plot.Id,
-                    BlockId = plot.BlockId,
-                    PlotNumber = plot.PlotNumber,
-                    Status = plot.Status,
-                    Price= plot.Price,
+                    plotList.Add(new PlotModel
+                    {
+                        Id = plot.Id,
+                        BlockId = plot.BlockId,
+                        PlotNumber = plot.PlotNumber,
+                        Status = plot.Status,
+                        Price = plot.Price,
 
-                });
+                    });
+                }
             }
 
             return plotList;

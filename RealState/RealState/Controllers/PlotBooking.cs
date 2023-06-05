@@ -3,12 +3,20 @@ using RealState.Models.BlockModels;
 using RealState.Models;
 using RealState.Models.PlotBooking;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using RealState.Hubs;
 
 namespace RealState.Controllers
 {
     [Authorize]
     public class PlotBooking : Controller
     {
+        private IHubContext<NotificationHub> _hubContext;
+        public PlotBooking(IHubContext<NotificationHub> hubContext)
+        {
+            _hubContext = hubContext;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -25,6 +33,8 @@ namespace RealState.Controllers
         {
             var bookingUM = new PlotBookingUM();
             bookingUM.BookNewPlot(plotBookingModel);
+            var count = new PlotBookingVM().GetBookedPlotCount();
+            _hubContext.Clients.All.SendAsync("BookedPlotCount", count);
             return RedirectToAction(nameof(Index));
         }
 
@@ -42,6 +52,8 @@ namespace RealState.Controllers
         {
             var bookingUM = new PlotBookingUM();
             bookingUM.VacateBookedPlot(id);
+            var count = new PlotBookingVM().GetBookedPlotCount();
+            _hubContext.Clients.All.SendAsync("BookedPlotCount", count);
             return RedirectToAction(nameof(Index));
         }
     }

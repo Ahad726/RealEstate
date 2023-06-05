@@ -39,7 +39,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>@ViewBag.BookedPlotCount</h3>
+                    <h3 id="result">@ViewBag.BookedPlotCount</h3>
 
                     <p>Plot Booking Completed</p>
                 </div>
@@ -573,3 +573,8 @@
     </div>
     <!-- /.row (main row) -->
 </div><!-- /.container-fluid -->
+@section Scripts
+    {
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/notification.js"></script>
+}
